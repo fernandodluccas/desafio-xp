@@ -9,3 +9,87 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Customer {
+  id            String          @id @default(uuid())
+  name          String
+  email         String          @unique
+  password      String
+  balance       Decimal         @default(0)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @default(now())
+  Order         Order[]
+  CustomerStock CustomerStock[]
+  Transaction   Transaction[]
+
+  @@map("customers")
+}
+
+model Stock {
+  id            String          @id @default(uuid())
+  symbol        String          @unique
+  company       String
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @default(now())
+  Order         Order[]
+  CustomerStock CustomerStock[]
+
+  @@map("stocks")
+}
+
+model Order {
+  id         String      @id @default(uuid())
+  customerId String
+  customer   Customer    @relation(fields: [customerId], references: [id])
+  stockId    String
+  stock      Stock       @relation(fields: [stockId], references: [id])
+  action     OrderAction
+  status     OrderStatus
+  quantity   Int         @default(0)
+  price      Decimal     @default(0)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @default(now())
+
+  @@map("orders")
+}
+
+enum OrderAction {
+  BUY
+  SELL
+}
+
+enum OrderStatus {
+  OPEN
+  CLOSED
+}
+
+model CustomerStock {
+  id         String   @id @default(uuid())
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id])
+  stockId    String
+  stock      Stock    @relation(fields: [stockId], references: [id])
+  quantity   Int      @default(0)
+  price      Decimal  @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+
+  @@map("customer_stocks")
+}
+
+model Transaction {
+  id         String          @id @default(uuid())
+  customerId String
+  customer   Customer        @relation(fields: [customerId], references: [id])
+  amount     Decimal         @default(0)
+  type       TransactionType
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @default(now())
+
+  @@map("transactions")
+}
+
+enum TransactionType {
+  DEPOSIT
+  WITHDRAW
+}
