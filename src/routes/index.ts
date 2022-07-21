@@ -7,6 +7,6 @@ const routes = Router();
 
 routes.use('/customers', customerRoutes);
 routes.use('/authenticate', authenticateRoutes);
-routes.use('/account', accountsRoutes);
+routes.use('/accounts', accountsRoutes);
 
 export default routes;
