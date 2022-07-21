@@ -25,3 +25,5 @@ class DepositTransactionService {
     return result;
   }
 }
+
+export default new DepositTransactionService();
