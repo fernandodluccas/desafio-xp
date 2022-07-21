@@ -10,7 +10,7 @@ class AccountDepositController {
       type,
     });
 
-    return res.status(201).json(result);
+    return res.status(200).json(result);
   }
 }
 

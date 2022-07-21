@@ -7,7 +7,7 @@ class AccountBalanceController {
 
     const balance = await accountBalanceService.execute(id);
 
-    return res.status(201).json(balance);
+    return res.status(200).json(balance);
   }
 }
 
