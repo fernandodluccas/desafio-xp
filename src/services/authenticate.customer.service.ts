@@ -1,8 +1,8 @@
 import { compare } from 'bcrypt';
-import { sign } from 'jsonwebtoken';
 import CustomError from '../errors/custom.error';
 import IUser from '../interfaces/ICustomer';
 import prisma from '../prisma/prismaClient';
+import { encrypt } from '../utils/jwt';
 
 class AuthenticateCustomerService {
   async execute({ email, password }: IUser): Promise<string> {
@@ -20,7 +20,7 @@ class AuthenticateCustomerService {
       throw new CustomError('Email or password invalid', 403);
     }
 
-    const token = sign({}, process.env.JWT_KEY as string, { expiresIn: '15m' });
+    const token = encrypt({ id: customer.id });
 
     return token;
   }

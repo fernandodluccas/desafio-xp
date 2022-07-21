@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import createCustomerController from '../controllers/create.customer.controller';
+import authenticateCustomerController from '../controllers/authenticate.customer.controller';
 import authenticateValidate from '../middleware/authenticate.validate';
 
 const authenticateRoutes = Router();
@@ -7,7 +7,7 @@ const authenticateRoutes = Router();
 authenticateRoutes.post(
   '/',
   authenticateValidate,
-  createCustomerController.handle
+  authenticateCustomerController.handle
 );
 
 export default authenticateRoutes;
