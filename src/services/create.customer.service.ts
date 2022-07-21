@@ -1,7 +1,7 @@
 import IUser from '../interfaces/ICustomer';
 import { hash } from 'bcrypt';
 import prisma from '../prisma/prismaClient';
-import CustomError from '../error/custom.error';
+import CustomError from '../errors/custom.error';
 
 class CreateCustomerService {
   async execute({ name, email, password }: IUser): Promise<IUser> {
@@ -10,7 +10,7 @@ class CreateCustomerService {
     });
 
     if (customerExists) {
-      throw new CustomError('Customer already exists', 422);
+      throw new CustomError('Customer already exists', 409);
     }
 
     const hashedPassword = await hash(password, 8);
