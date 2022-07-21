@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import depositTransactionService from '../services/deposit.transaction.service';
+import accountDepositService from '../services/account.deposit.service';
 
-class DepositTransactionController {
+class AccountDepositController {
   async handle(req: Request, res: Response): Promise<Response> {
     const { id, amount, type } = req.body;
-    const result = await depositTransactionService.execute({
+    const result = await accountDepositService.execute({
       id,
       amount,
       type,
@@ -14,4 +14,4 @@ class DepositTransactionController {
   }
 }
 
-export default new DepositTransactionController();
+export default new AccountDepositController();

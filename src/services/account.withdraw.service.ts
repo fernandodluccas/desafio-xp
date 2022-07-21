@@ -1,8 +1,8 @@
 import prisma from '../prisma/prismaClient';
 
-class DepositTransactionService {
+class WithdrawTransactionService {
   async execute({ id, amount, type }: ITransaction) {
-    const result = await prisma.$transaction([
+    const [result] = await prisma.$transaction([
       prisma.transaction.create({
         data: {
           customerId: id,
@@ -16,14 +16,14 @@ class DepositTransactionService {
         },
         data: {
           balance: {
-            increment: amount,
+            decrement: amount,
           },
         },
       }),
     ]);
 
-    return result;
+    return [result];
   }
 }
 
-export default new DepositTransactionService();
+export default new WithdrawTransactionService();

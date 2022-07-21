@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import withdrawTransactionService from '../services/withdraw.transaction.service';
+import accountWithdrawService from '../services/account.withdraw.service';
 
-class WithdrawTransactionController {
+class AccountWithdrawController {
   async handle(req: Request, res: Response): Promise<Response> {
     const { id, amount, type } = req.body;
-    const result = await withdrawTransactionService.execute({
+    const result = await accountWithdrawService.execute({
       id,
       amount,
       type,
@@ -14,4 +14,4 @@ class WithdrawTransactionController {
   }
 }
 
-export default new WithdrawTransactionController();
+export default new AccountWithdrawController();
