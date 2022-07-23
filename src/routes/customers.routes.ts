@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import createCustomerController from '../controllers/create.customer.controller';
-import customerValidate from '../middleware/customer.validate';
+import customerValidate from '../middlewares/customer.validate';
 
 const customerRoutes = Router();
 
