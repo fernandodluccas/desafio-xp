@@ -1,14 +1,6 @@
 import CustomError from '../errors/custom.error';
+import IInvestment from '../interfaces/IInvestment';
 import prisma from '../prisma/prismaClient';
-
-interface IInvestment {
-  customerId: string;
-  symbol: string;
-  action: 'BUY' | 'SELL';
-  status: 'OPEN' | 'CLOSED';
-  quantity: number;
-  price: number;
-}
 
 class InvestmentBuyService {
   async execute({ customerId, symbol, action, quantity, price }: IInvestment) {
