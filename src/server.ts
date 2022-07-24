@@ -2,7 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import swaggerUi from 'swagger-ui-express';
 import routes from './routes';
-import swaggerFile from '../swagger.json';
+import swaggerFile from './swagger.json';
 import errorHandler from './errors/error.handler';
 
 const app = express();
