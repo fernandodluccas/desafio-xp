@@ -62,7 +62,6 @@ A api foi desenvolvida utilizando o framework [Express](https://expressjs.com/).
 Alemdo do framework Express, a API foi construída com 
 
 * [TypeScript](https://www.typescriptlang.org/). O TypeScript é um transpiler de código fonte para código JavaScript.
-* 
 * [Prisma](https://www.prisma.io/). O Prisma é um ORM de banco de dados .
 * [PostgreSQL](https://www.postgresql.org/). O PostgreSQL é um banco de dados relacional.
 * [Joi](https://www.npmjs.com/package/joi). O Joi é uma bibiblioteca de validação de dados.
