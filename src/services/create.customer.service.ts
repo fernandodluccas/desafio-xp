@@ -1,10 +1,14 @@
-import IUser from '../interfaces/ICustomer';
+import ICustomer from '../interfaces/ICustomer';
 import { hash } from 'bcrypt';
 import prisma from '../prisma/prismaClient';
 import CustomError from '../errors/custom.error';
 
+interface IUser extends ICustomer {
+  name: string;
+}
+
 class CreateCustomerService {
-  async execute({ name, email, password }: IUser): Promise<IUser> {
+  async execute({ name, email, password }: IUser): Promise<ICustomer> {
     const customerExists = await prisma.customer.findFirst({
       where: { email },
     });
@@ -27,4 +31,4 @@ class CreateCustomerService {
   }
 }
 
-export default CreateCustomerService;
+export default new CreateCustomerService();
