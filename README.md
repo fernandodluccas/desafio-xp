@@ -38,7 +38,7 @@ npm run dev
 Rodar as migrations:
 
 ```bash
-npx primise db migrate
+npx prisma db migrate
 ```
 
 
