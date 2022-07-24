@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsnd --transpile-only --ignore-watch node_modules src/server.ts",
-    "start": "node dist/src/server.js",
+    "start": "node dist/server.js",
     "test": "nyc --reporter=html mocha --require ts-node/register __tests__/**/*.test.ts --exit"
   },
   "repository": {
