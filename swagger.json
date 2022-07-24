@@ -1,0 +1,359 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "XP Challenge API",
+    "description": "API documentation developed during the XP Inc technical challenge",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/customers": {
+      "post": {
+        "tags": ["Customers"],
+        "summary": "Register a user",
+        "description": "Register a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Customer name"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "Customer email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "Customer password"
+                  }
+                },
+                "example": {
+                  "name": "John Doe",
+                  "email": "johndoe@email.com",
+                  "password": "123456"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully"
+          },
+          "422": {
+            "description": "Fields validation error"
+          },
+          "409": {
+            "description": "User already exists"
+          }
+        }
+      }
+    },
+    "/authenticate": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Authenticate a user",
+        "description": "Authenticate a user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "description": "Customer email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "Customer password"
+                  }
+                },
+                "example": {
+                  "email": "johndoe@email.com",
+                  "password": "123456"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User authenticated successfully"
+          },
+          "422": {
+            "description": "Fields validation error"
+          },
+          "403": {
+            "description": "Invalid credentials"
+          }
+        }
+      }
+    },
+    "/accounts/deposit": {
+      "post": {
+        "tags": ["Accounts"],
+        "summary": "Deposit money to an account",
+        "description": "Deposit money to an account",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Account ID"
+                  },
+                  "amount": {
+                    "type": "number",
+                    "description": "Amount to deposit"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "Transaction type"
+                  }
+                },
+                "example": {
+                  "id": "123456789",
+                  "amount": 100,
+                  "type": "DEPOSIT"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deposit successful"
+          }
+        }
+      }
+    },
+    "/accounts/withdraw": {
+      "post": {
+        "tags": ["Accounts"],
+        "summary": "Withdraw money from an account",
+        "description": "Withdraw money from an account",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Account ID"
+                  },
+                  "amount": {
+                    "type": "number",
+                    "description": "Amount to withdraw"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "Transaction type"
+                  }
+                },
+                "example": {
+                  "id": "123456789",
+                  "amount": 100,
+                  "type": "WITHDRAW"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Withdraw successful"
+          }
+        }
+      }
+    },
+    "accounts/{id}": {
+      "get": {
+        "tags": ["Accounts"],
+        "summary": "Get an account balance",
+        "description": "Get an account balance",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Account ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account balance"
+          }
+        }
+      }
+    },
+    "/assets/{id}": {
+      "get": {
+        "tags": ["Assets"],
+        "summary": "Get an asset",
+        "description": "Get an asset",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Asset ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customerId": {
+                    "type": "string",
+                    "description": "Customer ID"
+                  }
+                },
+                "example": {
+                  "customerId": "123456789"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Asset retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "customerId": {
+                      "type": "string",
+                      "value": "123456789",
+                      "description": "Customer ID"
+                    },
+                    "symbol": {
+                      "type": "string",
+                      "description": "Asset symbol"
+                    },
+                    "quantity": {
+                      "type": "number",
+                      "description": "Asset quantity"
+                    },
+                    "price": {
+                      "type": "string",
+                      "description": "Asset price"
+                    }
+                  },
+                  "example": {
+                    "customerId": "123456789",
+                    "symbol": "AAPL",
+                    "quantity": 100,
+                    "price": "100.00"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "investments/buy": {
+      "post": {
+        "tags": ["Investments"],
+        "summary": "Buy an asset",
+        "description": "Buy an asset",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "customerId": "123456789",
+                  "symbol": "AAPL",
+                  "quantity": 100,
+                  "price": "100.00"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Asset purchased successfully",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "example":{
+                    "id": "123456789",
+                    "customerId": "123456789",
+                    "stockId": "123456789",
+                    "action": "BUY",
+                    "status": "OPEN",
+                    "quantity": 100,
+                    "price": "100.00",
+                    "createdAt": "2020-01-01T00:00:00.000Z",
+                    "updatedAt": "2020-01-01T00:00:00.000Z"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "investments/sell":{
+      "post": {
+        "tags": ["Investments"],
+        "summary": "Sell an asset",
+        "description": "Sell an asset",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "customerId": "123456789",
+                  "stockId": "123456789",
+                  "action": "SELL",
+                  "status": "OPEN",
+                  "quantity": 100,
+                  "price": "100.00"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Asset sold successfully",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "example":{
+                    "id": "123456789",
+                    "customerId": "123456789",
+                    "stockId": "123456789",
+                    "action": "SELL",
+                    "status": "OPEN",
+                    "quantity": 100,
+                    "price": "100.00",
+                    "createdAt": "2020-01-01T00:00:00.000Z",
+                    "updatedAt": "2020-01-01T00:00:00.000Z"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    }
+  }

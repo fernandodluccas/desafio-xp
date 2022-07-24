@@ -7,7 +7,7 @@ class AssetsController {
 
     const assets = await assetService.execute(id);
 
-    return res.status(201).json(assets);
+    return res.status(200).json(assets);
   }
 }
 

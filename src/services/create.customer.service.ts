@@ -27,4 +27,4 @@ class CreateCustomerService {
   }
 }
 
-export default new CreateCustomerService();
+export default CreateCustomerService;
